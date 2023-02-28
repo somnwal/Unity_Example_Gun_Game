@@ -51,10 +51,13 @@ public class EnemyController : MonoBehaviour
                 moveDirection = Vector3.zero;
             }
 
+            // 방향 노멀라이즈 ( 팍 튀는거 방지 )
             moveDirection.Normalize();
 
+            // 구한 방향으로 움직이기
             rigidBody.velocity = moveDirection * moveSpeed;
 
+            // 이동여부에 따른 애니메이션 설정
             if(moveDirection != Vector3.zero) {
                 animator.SetBool("isMoving", true);
             } else {
@@ -65,6 +68,7 @@ public class EnemyController : MonoBehaviour
             if(isShoot && Vector3.Distance(transform.position, PlayerController.instance.transform.position) <= shootRange) {
                 fireCount -= Time.deltaTime;
 
+                // 총 쏘기
                 if(fireCount <= 0) {
                     fireCount = fireRate;
 
@@ -77,6 +81,7 @@ public class EnemyController : MonoBehaviour
     public void DamageEnemy(int damage) {
         hp -= damage;
 
+        // HP 가 0 이하면 죽음
         if(hp <= 0) {
             Destroy(gameObject);
 
