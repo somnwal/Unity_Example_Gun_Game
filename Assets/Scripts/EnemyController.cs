@@ -42,8 +42,8 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // 화면에 보일때만 공격
-        if(body.isVisible) {
+        // 화면에 보일때만 공격 + 플레이어가 살아 있을때만 공격
+        if(body.isVisible && PlayerController.instance.gameObject.activeInHierarchy) {
             // 플레이어와 캐릭터 사이 거리 구하기 (거리가 range 보다 적으면)
             if(Vector3.Distance(transform.position, PlayerController.instance.transform.position) < range) {
                 moveDirection = PlayerController.instance.transform.position - transform.position;
@@ -72,18 +72,25 @@ public class EnemyController : MonoBehaviour
                 if(fireCount <= 0) {
                     fireCount = fireRate;
 
+                    AudioManager.instance.playSFX(13);
                     Instantiate(bullet, firePoint.transform.position, firePoint.transform.rotation);
                 }
             }
+        } else {
+            rigidBody.velocity = Vector2.zero;
         }
     }
 
     public void DamageEnemy(int damage) {
         hp -= damage;
 
+        AudioManager.instance.playSFX(2);
+
         // HP 가 0 이하면 죽음
         if(hp <= 0) {
             Destroy(gameObject);
+
+            AudioManager.instance.playSFX(1);
 
             int selected = Random.Range(0, deathEffects.Length);
 

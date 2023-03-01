@@ -36,10 +36,18 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\AudioManager.cs" />
+     <Compile Include="Assets\Scripts\Breakable.cs" />
+     <Compile Include="Assets\Scripts\BrokenPieces.cs" />
+     <Compile Include="Assets\Scripts\DamagePlayer.cs" />
      <Compile Include="Assets\Scripts\EnemyBullet.cs" />
      <Compile Include="Assets\Scripts\EnemyController.cs" />
+     <Compile Include="Assets\Scripts\HealthPickup.cs" />
      <Compile Include="Assets\Scripts\PlayerBullet.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
+     <Compile Include="Assets\Scripts\PlayerHealthController.cs" />
+     <Compile Include="Assets\Scripts\SpriteSupportOrder.cs" />
+     <Compile Include="Assets\Scripts\UIController.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:\Program Files\Unity\Hub\Editor\2019.4.40f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

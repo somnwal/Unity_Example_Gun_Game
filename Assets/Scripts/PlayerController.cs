@@ -25,6 +25,23 @@ public class PlayerController : MonoBehaviour
 
     private float fireCount;
 
+    public SpriteRenderer body;
+
+    private float activeMoveSpeed;
+
+    public float dashSpeed = 8f;
+
+    public float dashLength = 0.5f;
+
+    public float dashCoolDown = 1f;
+
+    public float dashInvincibility = 0.5f;
+
+    [HideInInspector]
+    public float dashCounter;
+    
+    public float dashCoolCounter;
+
     private void Awake() {
         if(instance == null) {
             instance = this;
@@ -35,6 +52,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         cam = Camera.main;
+
+        activeMoveSpeed = moveSpeed;
     }
 
     // Update is called once per frame
@@ -48,7 +67,7 @@ public class PlayerController : MonoBehaviour
         // 캐릭터 이동 급가속 되는거 방지
         moveInput.Normalize();
 
-        rigidBody.velocity = moveInput * moveSpeed;
+        rigidBody.velocity = moveInput * activeMoveSpeed;
 
         // 마우스 위치 얻어오기
         Vector3 mousePosition = Input.mousePosition;
@@ -85,12 +104,45 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetMouseButton(0)) {
             fireCount -= Time.deltaTime;
+            
 
             if(fireCount <= 0) {
+                AudioManager.instance.playSFX(12);
+
                 Instantiate(bullet, firePoint.position, firePoint.rotation);
 
                 fireCount = shootingInterval;
             }
+        }
+
+        // 대시 ============
+        if(Input.GetKeyDown(KeyCode.Space)) {
+
+            if(dashCoolCounter <= 0 && dashCounter <= 0) {
+                activeMoveSpeed = dashSpeed;
+                dashCounter = dashLength;
+
+                // 대시 애니메이션 트리거
+                animator.SetTrigger("dash");
+
+                AudioManager.instance.playSFX(8);
+
+                // 대시하는 동안 무적으로 만들기
+                PlayerHealthController.instance.makeInvincible(dashInvincibility);
+            }
+        }
+
+        if(dashCounter > 0) {
+            dashCounter -= Time.deltaTime;
+
+            if(dashCounter <= 0) {
+                activeMoveSpeed = moveSpeed;
+                dashCoolCounter = dashCoolDown;
+            }
+        }
+
+        if(dashCoolCounter > 0) {
+            dashCoolCounter -= Time.deltaTime;
         }
 
         if(moveInput != Vector2.zero) {
@@ -99,4 +151,6 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("isMoving", false);
         }
     }
+
+    
 }

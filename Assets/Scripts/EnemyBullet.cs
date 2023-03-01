@@ -23,7 +23,13 @@ public class EnemyBullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) {
         Destroy(gameObject);
-    
+        AudioManager.instance.playSFX(4);
+
+        if(other.tag == "Player") {
+            PlayerHealthController.instance.damagePlayer();
+        }
+        
+
     }
 
     private void OnBecameInvisible() {
