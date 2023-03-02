@@ -27,33 +27,40 @@ public class Breakable : MonoBehaviour
         
     }
 
+    private void smash() {
+        Destroy(gameObject);
+
+        AudioManager.instance.playSFX(breakSoundIndex);
+
+        // 부서진 조각 보여주기
+        int piecesToDrop = Random.Range(1, maxPieces);
+
+        for(int i=0; i<piecesToDrop; i++) {
+            int selected = Random.Range(0, brokenPiece.Length);
+            Instantiate(brokenPiece[selected], transform.position, transform.rotation);
+        }
+
+        // 아이템 드랍
+        if(isDrop) {
+            float dropChance = Random.Range(0f, 100f);
+
+            if(dropChance < itemDropPercent) {
+                int itemToDrop = Random.Range(0, items.Length);
+
+                Instantiate(items[itemToDrop], transform.position, transform.rotation);
+            }
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.tag == "Player") {
             if(PlayerController.instance.dashCounter > 0) {
-                Destroy(gameObject);
-
-                AudioManager.instance.playSFX(breakSoundIndex);
-
-                // 부서진 조각 보여주기
-                int piecesToDrop = Random.Range(1, maxPieces);
-
-                for(int i=0; i<piecesToDrop; i++) {
-                    int selected = Random.Range(0, brokenPiece.Length);
-                    Instantiate(brokenPiece[selected], transform.position, transform.rotation);
-                }
-
-                // 아이템 드랍
-                if(isDrop) {
-                    float dropChance = Random.Range(0f, 100f);
-
-                    if(dropChance < itemDropPercent) {
-                        int itemToDrop = Random.Range(0, items.Length);
-
-                        Instantiate(items[itemToDrop], transform.position, transform.rotation);
-                    }
-                }
-                
+                smash();
             }
+        }
+
+        if(other.tag == "PlayerBullet") {
+            smash();
         }
     }
 }

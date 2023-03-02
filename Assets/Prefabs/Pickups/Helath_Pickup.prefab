@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5255921450543557759}
   - component: {fileID: 5255921450543557756}
   - component: {fileID: 5255921450543557757}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Helath_Pickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healAmount: 1
+  waitingTime: 0.5
 --- !u!61 &5255921450543557757
 BoxCollider2D:
   m_ObjectHideFlags: 0

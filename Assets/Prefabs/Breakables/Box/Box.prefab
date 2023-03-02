@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2441150550281352491}
   - component: {fileID: 2441150550281352490}
   - component: {fileID: 104089549510305601}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59,6 +59,7 @@ MonoBehaviour:
   - {fileID: 5255921450543557730, guid: 71f87ba0546b38844b796602a242b8ad, type: 3}
   - {fileID: 19984950524987906, guid: 566d996fbaffa984984e093f8361c582, type: 3}
   itemDropPercent: 50
+  breakSoundIndex: 0
 --- !u!212 &2441150550281352491
 SpriteRenderer:
   m_ObjectHideFlags: 0

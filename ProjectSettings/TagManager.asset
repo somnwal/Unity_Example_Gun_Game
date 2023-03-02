@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Map
+  - PlayerBullet
   layers:
   - Default
   - TransparentFX
@@ -19,9 +20,9 @@ TagManager:
   - PlayerBullet
   - Enemy
   - EnemyBullet
-  - 
-  - 
-  - 
+  - Breakable
+  - IgnoreBullets
+  - Pickups
   - 
   - 
   - 
