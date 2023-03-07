@@ -6,13 +6,12 @@ public class Room : MonoBehaviour
 {
     public bool closeWhenEntered;
 
-    public bool openWhenEnemiesCleared;
-
     public GameObject[] doors;
 
-    public List<GameObject> enemies = new List<GameObject>();
+    //public List<GameObject> enemies = new List<GameObject>();
 
-    private bool roomAcitve;
+    [HideInInspector]
+    public bool roomActive;
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +22,8 @@ public class Room : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(enemies.Count > 0 && openWhenEnemiesCleared) {
+        /*
+        if(enemies.Count > 0 && roomActive && openWhenEnemiesCleared) {
             for(int i=0; i<enemies.Count; i++) {
                 if(enemies[i] == null) {
                     enemies.RemoveAt(i);
@@ -32,12 +32,16 @@ public class Room : MonoBehaviour
             }
 
             if(enemies.Count == 0) {
-                foreach(GameObject door in doors) {
-                    door.SetActive(false);
-
-                    closeWhenEntered = false;
-                }
+                
             }
+        }
+        */
+    }
+
+    public void openDoors() {
+        foreach(GameObject door in doors) {
+            door.SetActive(false);
+            closeWhenEntered = false;
         }
     }
 
@@ -51,13 +55,13 @@ public class Room : MonoBehaviour
                 }
             }
 
-            roomAcitve = true;
+            roomActive = true;
         }
     }
 
     private void OnTriggerExit2D(Collider2D other) {
         if(other.tag == "Player") {
-            roomAcitve = false;
+            roomActive = false;
         }
     }
 }
