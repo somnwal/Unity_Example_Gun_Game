@@ -7,7 +7,27 @@ public class EnemyController : MonoBehaviour
     public Rigidbody2D rigidBody;
     public float moveSpeed;
 
+    // 추격 설정
+    public bool chase; 
+
     public float range;
+
+    // 도망 설정
+    public bool runAway;
+
+    public float runAwayRange;
+
+
+    // 배회 설정
+    public bool wander;
+
+    public float wanderLength, pauseLength;
+    
+    private float wanderCounter, pauseCounter;
+
+    private Vector3 wanderDirection;
+    
+
 
     public float shootRange;
 
@@ -36,7 +56,9 @@ public class EnemyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if(wander) {
+            pauseCounter = Random.Range(pauseLength * 0.75f, pauseLength * 1.25f);
+        }
     }
 
     // Update is called once per frame
@@ -44,11 +66,40 @@ public class EnemyController : MonoBehaviour
     {
         // 화면에 보일때만 공격 + 플레이어가 살아 있을때만 공격
         if(body.isVisible && PlayerController.instance.gameObject.activeInHierarchy) {
+            moveDirection = Vector3.zero;
+
             // 플레이어와 캐릭터 사이 거리 구하기 (거리가 range 보다 적으면)
-            if(Vector3.Distance(transform.position, PlayerController.instance.transform.position) < range) {
+            if(Vector3.Distance(transform.position, PlayerController.instance.transform.position) < range && chase) {
                 moveDirection = PlayerController.instance.transform.position - transform.position;
             } else {
-                moveDirection = Vector3.zero;
+                if(wander) {
+                    if(wanderCounter > 0) {
+                        wanderCounter -= Time.deltaTime;
+
+                        moveDirection = wanderDirection;
+
+                        if(wanderCounter <= 0) {
+                            pauseCounter = Random.Range(pauseLength * 0.75f, pauseLength * 1.25f);
+                        }
+                    }
+
+                    if(pauseCounter > 0) {
+                        pauseCounter -= Time.deltaTime;
+
+                        if(pauseCounter <= 0) {
+                            wanderCounter = Random.Range(wanderLength * 0.75f, wanderLength * 1.25f);
+
+
+                            // 랜덤 방향
+                            wanderDirection = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
+                        }
+                    }
+                }
+            }
+
+            // 도망가기 설정
+            if(Vector3.Distance(transform.position, PlayerController.instance.transform.position) < runAwayRange && runAway) {
+                moveDirection = transform.position - PlayerController.instance.transform.position;
             }
 
             // 방향 노멀라이즈 ( 팍 튀는거 방지 )
