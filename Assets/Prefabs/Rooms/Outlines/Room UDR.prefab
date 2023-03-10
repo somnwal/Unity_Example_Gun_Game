@@ -323,7 +323,7 @@ MonoBehaviour:
   doors:
   - {fileID: 7586878961619203}
   - {fileID: 8130647513505464321}
-  - {fileID: 8130647513505464321}
+  - {fileID: 5881758374601948366}
   roomActive: 0
 --- !u!1 &2190628937810894793
 GameObject:

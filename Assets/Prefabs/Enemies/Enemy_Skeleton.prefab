@@ -80,7 +80,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidBody: {fileID: 9051297078097299383}
   moveSpeed: 1
+  chase: 0
   range: 8
+  runAway: 0
+  runAwayRange: 0
+  wander: 0
+  wanderLength: 0
+  pauseLength: 0
   shootRange: 10
   animator: {fileID: 9051297078097299379}
   hp: 200
@@ -96,6 +102,10 @@ MonoBehaviour:
   firePoint: {fileID: 1276802431123628187}
   fireRate: 1
   body: {fileID: 9051297078738517241}
+  isDrop: 1
+  items:
+  - {fileID: 4502456150448296566, guid: f5a96dc2e23ecd24f90a50583c0fc0bd, type: 3}
+  itemDropPercent: 70
 --- !u!61 &9051297078097299381
 BoxCollider2D:
   m_ObjectHideFlags: 0

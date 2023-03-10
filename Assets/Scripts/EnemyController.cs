@@ -53,6 +53,12 @@ public class EnemyController : MonoBehaviour
 
     public SpriteRenderer body;
 
+    public bool isDrop;
+
+    public GameObject[] items;
+
+    public float itemDropPercent;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -149,6 +155,17 @@ public class EnemyController : MonoBehaviour
 
             Instantiate(deathEffects[selected], transform.position, Quaternion.Euler(0f, 0f, rotation * 90f));
             Instantiate(hitEffect, transform.position, transform.rotation);
+
+            // 아이템 드랍
+            if(isDrop) {
+                float dropChance = Random.Range(0f, 100f);
+
+                if(dropChance < itemDropPercent) {
+                    int itemToDrop = Random.Range(0, items.Length);
+
+                    Instantiate(items[itemToDrop], transform.position, transform.rotation);
+                }
+            }
         }
     }
 }

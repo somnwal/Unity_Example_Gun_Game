@@ -166,6 +166,9 @@ MonoBehaviour:
   range: 8
   runAway: 1
   runAwayRange: 7
+  wander: 0
+  wanderLength: 0
+  pauseLength: 0
   shootRange: 10
   animator: {fileID: 1085765108185409370}
   hp: 200
@@ -181,6 +184,10 @@ MonoBehaviour:
   firePoint: {fileID: 7148864262957973618}
   fireRate: 1
   body: {fileID: 1085765107547347984}
+  isDrop: 1
+  items:
+  - {fileID: 4502456150448296566, guid: f5a96dc2e23ecd24f90a50583c0fc0bd, type: 3}
+  itemDropPercent: 70
 --- !u!61 &1085765108185409372
 BoxCollider2D:
   m_ObjectHideFlags: 0

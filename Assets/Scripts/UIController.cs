@@ -12,6 +12,8 @@ public class UIController : MonoBehaviour
     
     public Text hpText;
 
+    public Text coinText;
+
     public GameObject deathScreen;
 
     public Image fadeScreen;

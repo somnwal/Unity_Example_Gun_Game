@@ -58,7 +58,9 @@ MonoBehaviour:
   items:
   - {fileID: 5255921450543557730, guid: 71f87ba0546b38844b796602a242b8ad, type: 3}
   - {fileID: 19984950524987906, guid: 566d996fbaffa984984e093f8361c582, type: 3}
-  itemDropPercent: 50
+  - {fileID: 4502456150448296566, guid: f5a96dc2e23ecd24f90a50583c0fc0bd, type: 3}
+  - {fileID: 4502456150448296566, guid: f5a96dc2e23ecd24f90a50583c0fc0bd, type: 3}
+  itemDropPercent: 70
   breakSoundIndex: 0
 --- !u!212 &2441150550281352491
 SpriteRenderer:

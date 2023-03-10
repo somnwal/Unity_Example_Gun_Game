@@ -73,6 +73,10 @@ MonoBehaviour:
   firePoint: {fileID: 6347556064431875134}
   fireRate: 1
   body: {fileID: 3761555909182060636}
+  isDrop: 1
+  items:
+  - {fileID: 4502456150448296566, guid: f5a96dc2e23ecd24f90a50583c0fc0bd, type: 3}
+  itemDropPercent: 70
 --- !u!61 &3761555908747412240
 BoxCollider2D:
   m_ObjectHideFlags: 0
