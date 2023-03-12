@@ -26,6 +26,12 @@ public class UIController : MonoBehaviour
 
     public GameObject pauseMenu;
 
+    public GameObject minimap;
+
+    public Image currentGun;
+
+    public Text currentGunText;
+
     private void Awake() {
         instance = this;
     }

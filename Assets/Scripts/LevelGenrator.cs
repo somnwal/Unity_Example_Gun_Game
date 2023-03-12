@@ -6,9 +6,13 @@ using UnityEngine.SceneManagement;
 public class LevelGenrator : MonoBehaviour
 {
     public GameObject layoutRoom;
-    public Color startColor, endColor;
+    public Color startColor, endColor, shopColor;
 
     public int distanceToEnd;
+
+    public bool includeShop;
+
+    public int minDistanceToShop, maxDistanceToShop;
 
     public Transform generatorPoint;
 
@@ -20,6 +24,8 @@ public class LevelGenrator : MonoBehaviour
 
     private GameObject endRoom;
 
+    private GameObject shopRoom;
+
     public float xOffset = 18f, yOffset = 10f;
 
     private List<GameObject> layoutRoomObejects = new List<GameObject>();
@@ -28,7 +34,7 @@ public class LevelGenrator : MonoBehaviour
 
     private List<GameObject> generatedOutlines = new List<GameObject>();
 
-    public RoomCenter centerStart, centerEnd;
+    public RoomCenter centerStart, centerEnd, centerShop;
 
     public RoomCenter[] pointentialCenters;
 
@@ -61,6 +67,22 @@ public class LevelGenrator : MonoBehaviour
             }
         }
 
+        // 샵 방 만들기 (색 입히기)
+
+        if(includeShop) {
+            int shopSelected = Random.Range(minDistanceToShop, maxDistanceToShop + 1);
+
+            shopRoom = layoutRoomObejects[shopSelected];
+            layoutRoomObejects.RemoveAt(shopSelected);
+
+            shopRoom.GetComponent<SpriteRenderer>().color = shopColor;
+
+
+        }
+
+        // 샵 방 만들기 끝
+
+
         createRoomOutline(Vector3.zero);
 
         foreach(GameObject room in layoutRoomObejects) {
@@ -69,6 +91,10 @@ public class LevelGenrator : MonoBehaviour
 
         createRoomOutline(endRoom.transform.position);
     
+        if(includeShop) {
+            createRoomOutline(shopRoom.transform.position);
+        }
+
 
         // 시작과 끝방 처리
         foreach(GameObject outline in generatedOutlines) {
@@ -87,12 +113,18 @@ public class LevelGenrator : MonoBehaviour
                 generateCenter = false;
             }
 
+            if(includeShop) {
+                if(outline.transform.position == shopRoom.transform.position) {
+                Instantiate(centerShop, outline.transform.position, outline.transform.rotation).room = outline.GetComponent<Room>();
+                generateCenter = false;
+                }
+            }
+
             if(generateCenter) {
                 int centerSelect = Random.Range(0, pointentialCenters.Length);
 
                 Instantiate(pointentialCenters[centerSelect], outline.transform.position, outline.transform.rotation).room = outline.GetComponent<Room>();
             }
-            
             
         }
     }

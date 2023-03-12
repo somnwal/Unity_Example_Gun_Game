@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
 
     public Animator animator;
 
+    /*
     public GameObject bullet;
 
     public Transform firePoint;
@@ -24,6 +25,8 @@ public class PlayerController : MonoBehaviour
     public float shootingInterval;
 
     private float fireCount;
+    */
+
 
     public SpriteRenderer body;
 
@@ -45,6 +48,11 @@ public class PlayerController : MonoBehaviour
     [HideInInspector]
     public bool canMove = true;
 
+    public List<Gun> weapons = new List<Gun>();
+
+    [HideInInspector]
+    public int currentWeapon;
+
     private void Awake() {
         if(instance == null) {
             instance = this;
@@ -57,6 +65,9 @@ public class PlayerController : MonoBehaviour
         cam = Camera.main;
 
         activeMoveSpeed = moveSpeed;
+
+        UIController.instance.currentGun.sprite = weapons[currentWeapon].gunUI;
+        UIController.instance.currentGunText.text = weapons[currentWeapon].weaponName;
     }
 
     // Update is called once per frame
@@ -97,15 +108,13 @@ public class PlayerController : MonoBehaviour
             weapon.rotation = Quaternion.Euler(0, 0, angle);
 
 
-
-
             // 총 발사 ==========
 
             // 마우스 첫번째 버튼 눌렀을 때
             // if(Input.GetMouseButtonDown(0)) {
             //     Instantiate(bullet, firePoint.position, firePoint.rotation);
             // }
-
+            /*
             if(Input.GetMouseButton(0)) {
                 fireCount -= Time.deltaTime;
                 
@@ -116,6 +125,19 @@ public class PlayerController : MonoBehaviour
                     Instantiate(bullet, firePoint.position, firePoint.rotation);
 
                     fireCount = shootingInterval;
+                }
+            }
+            */
+
+            if(Input.GetKeyDown(KeyCode.Tab)) {
+                if(weapons.Count > 0) {
+                    currentWeapon++;
+
+                    if(currentWeapon >= weapons.Count) {
+                        currentWeapon = 0;
+                    }
+
+                    switchGun();
                 }
             }
 
@@ -158,5 +180,16 @@ public class PlayerController : MonoBehaviour
             rigidBody.velocity = Vector2.zero;
             animator.SetBool("isMoving", false);
         }
+    }
+
+    public void switchGun() {
+        foreach(Gun gun in weapons) {
+            gun.gameObject.SetActive(false);
+        }
+
+        weapons[currentWeapon].gameObject.SetActive(true);
+
+        UIController.instance.currentGun.sprite = weapons[currentWeapon].gunUI;
+        UIController.instance.currentGunText.text = weapons[currentWeapon].weaponName;
     }
 }

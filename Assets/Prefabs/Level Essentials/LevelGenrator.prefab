@@ -78,9 +78,13 @@ MonoBehaviour:
     type: 3}
   startColor: {r: 0, g: 1, b: 0.95229244, a: 0.46666667}
   endColor: {r: 1, g: 0, b: 0, a: 1}
+  shopColor: {r: 1, g: 0.8045081, b: 0, a: 1}
   distanceToEnd: 10
+  includeShop: 1
+  minDistanceToShop: 3
+  maxDistanceToShop: 7
   generatorPoint: {fileID: 4507325593155805773}
-  selectedDirection: 0
+  selectedDirection: 3
   whatIsRoom:
     serializedVersion: 2
     m_Bits: 32768
@@ -115,6 +119,8 @@ MonoBehaviour:
   centerStart: {fileID: 3193368320613095653, guid: fee018d68be0f4142af1fedce80c1bf5,
     type: 3}
   centerEnd: {fileID: 3066843556533291874, guid: 1a54d992d569a1840882b773392b9b12,
+    type: 3}
+  centerShop: {fileID: 7614702965255459220, guid: ca104ad210ec81349874694b2e47fbe2,
     type: 3}
   pointentialCenters:
   - {fileID: 7552739810292799544, guid: cd103c7ceb16a8e4aabd92125e420e0b, type: 3}

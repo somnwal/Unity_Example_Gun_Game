@@ -97,4 +97,19 @@ public class PlayerHealthController : MonoBehaviour
     public void makeInvincible(float length) {
         invincCount = length;
     }
+
+    public void increaseMaxHealth(int amount) {
+        max_hp += amount;
+
+        current_hp = max_hp;
+
+        UIController.instance.hpSlider.maxValue = max_hp;
+
+        // 슬라이더에 현재 hp 설정
+        UIController.instance.hpSlider.value = current_hp;
+        // hp 텍스트 설정
+        UIController.instance.hpText.text = current_hp + " / " + max_hp;
+
+        
+    }
 }

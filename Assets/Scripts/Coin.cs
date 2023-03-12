@@ -19,9 +19,9 @@ public class Coin : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.tag == "Player" && waitToBeCollected <= 0) {
             LevelManager.instance.getCoins(coinValue);
-            
+
             Destroy(gameObject);
-            AudioManager.instance.playSFX(7);
+            AudioManager.instance.playSFX(5);
         }
     }
 }

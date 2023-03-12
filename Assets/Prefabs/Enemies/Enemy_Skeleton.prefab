@@ -80,7 +80,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidBody: {fileID: 9051297078097299383}
   moveSpeed: 1
-  chase: 0
+  chase: 1
   range: 8
   runAway: 0
   runAwayRange: 0
